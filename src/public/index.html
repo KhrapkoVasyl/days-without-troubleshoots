@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Дні без траблшутів</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 3rem;
+      }
+      .counter {
+        font-size: 10rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Днів без траблшутів: <br />
+      <span class="counter" id="counter">Завантаження...</span>
+    </h1>
+
+    <script>
+      const counterElement = document.getElementById('counter');
+
+      async function getCounter() {
+        const response = await fetch('/get-counter');
+        const data = await response.json();
+        counterElement.textContent = data.counter;
+      }
+
+      window.onload = getCounter;
+    </script>
+  </body>
+</html>
