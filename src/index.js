@@ -24,15 +24,15 @@ app.post('/increment-counter', (req, res) => {
   res.json({ success: true, counter });
 });
 
-cron.schedule('* * * * *', () => {
+cron.schedule('0 * * * *', () => {
   const kyivTime = moment.tz('Europe/Kiev');
   const currentDay = kyivTime.format('YYYY-MM-DD');
 
-  // if (currentDay !== lastUpdateDay) {
-  counter++;
-  // lastUpdateDay = currentDay;
-  console.log(`Counter incremented in CRON job. Current value: ${counter}`);
-  // }
+  if (currentDay !== lastUpdateDay) {
+    counter++;
+    lastUpdateDay = currentDay;
+    console.log(`Counter incremented in CRON job. Current value: ${counter}`);
+  }
 });
 
 app.listen(3000, () => {
